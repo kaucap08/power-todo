@@ -1,38 +1,260 @@
-.App {
-  text-align: center;
+/* Ajustes globais para deixar o app mais moderno
+   e reforçar o contraste entre modo claro e escuro. */
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top left, #e0e7ff, #f9fafb);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  transition: background 0.3s ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body.dark {
+  background: radial-gradient(circle at top left, #020617, #0f172a);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.modo-claro {
+  color: #020617;
+}
+
+.modo-escuro {
+  color: #e5e7eb;
+}
+
+.modo-escuro .shadow-xl,
+.modo-escuro .shadow-2xl {
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.8);
+}
+
+.modo-claro .shadow-xl,
+.modo-claro .shadow-2xl {
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.15);
+}
+
+/* Garantir que as cores do Tailwind dark mode funcionem */
+.dark .dark\:bg-slate-900 {
+  background-color: #0f172a !important;
+}
+
+.dark .dark\:bg-slate-800 {
+  background-color: #1e293b !important;
+}
+
+.dark .dark\:text-white {
+  color: #ffffff !important;
+}
+
+.dark .dark\:text-slate-100 {
+  color: #f1f5f9 !important;
+}
+
+.dark .dark\:border-slate-800 {
+  border-color: #1e293b !important;
+}
+
+.dark .dark\:border-slate-700 {
+  border-color: #334155 !important;
+}
+
+/* Variáveis CSS para temas adaptativos */
+:root {
+  --primary-color: #6366f1;
+  --secondary-color: #8b5cf6;
+  --animation-speed: 1s;
+  --bg-intensity: 1;
+}
+
+/* Temas adaptativos */
+body[data-theme="energetic"] {
+  --primary-color: #10b981;
+  --secondary-color: #3b82f6;
+}
+
+body[data-theme="warm"] {
+  --primary-color: #f59e0b;
+  --secondary-color: #ef4444;
+}
+
+body[data-theme="cool"] {
+  --primary-color: #06b6d4;
+  --secondary-color: #8b5cf6;
+}
+
+body[data-theme="calm"] {
+  --primary-color: #84cc16;
+  --secondary-color: #14b8a6;
+}
+
+/* Animações suaves para transições de tema */
+* {
+  transition: background-color calc(var(--animation-speed) * 0.5) ease,
+              color calc(var(--animation-speed) * 0.5) ease,
+              border-color calc(var(--animation-speed) * 0.5) ease;
+}
+
+/* Intensidade de background adaptativa */
+body {
+  filter: brightness(var(--bg-intensity));
+}
+
+/* Animações para elementos interativos */
+.interactive-element {
+  transition: transform calc(var(--animation-speed) * 0.3) ease,
+              box-shadow calc(var(--animation-speed) * 0.3) ease;
+}
+
+.interactive-element:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading states */
+.loading-pulse {
+  animation: pulse calc(var(--animation-speed) * 2) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus aprimorado */
+*:focus {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Animações CSS para substituir o Framer Motion */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@keyframes slideInLeft {
+  from { 
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.App-link {
-  color: #61dafb;
+@keyframes slideIn {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+    scale: 0.95;
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+    scale: 1;
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes scaleIn {
+  from { 
+    opacity: 0;
+    transform: scale(0);
   }
-  to {
-    transform: rotate(360deg);
+  to { 
+    opacity: 1;
+    transform: scale(1);
   }
+}
+
+@keyframes progressBar {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes progressFill {
+  from { width: 0; }
+  to { width: var(--progress-width, 100%); }
+}
+
+@keyframes warningPulse {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+/* Classes de animação */
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.4s ease-out;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.5s ease-out;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.4s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.3s ease-out;
+}
+
+.animate-progressBar {
+  animation: progressBar 0.6s ease-out;
+}
+
+.animate-progressFill {
+  animation: progressFill 1.5s ease-out;
+}
+
+.animate-warning-pulse {
+  animation: warningPulse 2s infinite;
+}
+
+/* Animações de hover */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Animações de interação */
+.interactive-button {
+  transition: all 0.2s ease;
+}
+
+.interactive-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.interactive-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

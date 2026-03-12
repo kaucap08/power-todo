@@ -1,0 +1,30 @@
+/* Estilos globais do app */
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top left, #e0e7ff, #f9fafb);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+}
+
+body.dark {
+  background: radial-gradient(circle at top left, #020617, #020617);
+}
+
+.app-root.app-light {
+  color: #020617;
+}
+
+.app-root.app-dark {
+  color: #e5e7eb;
+}
+
+.app-dark .shadow-xl,
+.app-dark .shadow-2xl {
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.8);
+}
+
+.app-light .shadow-xl,
+.app-light .shadow-2xl {
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.15);
+}
+

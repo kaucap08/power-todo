@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
 function App() {
+  // --- CONFIGURAÇÃO DA API ---
+  // Substituímos o localhost pelo seu link real do PythonAnywhere
+  const API_URL = 'https://kauanpains.pythonanywhere.com';
+
   // --- ESTADOS ---
   const [tasks, setTasks] = useState([]);
   const [menuAtivo, setMenuAtivo] = useState("dashboard");
@@ -23,7 +27,7 @@ function App() {
 
   // --- CARREGAR DADOS ---
   const carregarTarefas = () => {
-    fetch('http://127.0.0.1:5000/tasks')
+    fetch(`${API_URL}/tasks`)
       .then(res => res.json())
       .then(data => setTasks(data))
       .catch(err => console.error("Erro ao conectar com o servidor:", err));
@@ -36,7 +40,7 @@ function App() {
   // --- FUNÇÕES DA API ---
   const addTask = () => {
     if (!novoTitulo.trim()) return;
-    fetch('http://127.0.0.1:5000/tasks', {
+    fetch(`${API_URL}/tasks`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -53,17 +57,17 @@ function App() {
   };
 
   const toggleTask = (id) => {
-    fetch(`http://127.0.0.1:5000/tasks/${id}`, { method: 'PUT' })
+    fetch(`${API_URL}/tasks/${id}`, { method: 'PUT' })
       .then(() => carregarTarefas());
   };
 
   const deleteTask = (id) => {
-    fetch(`http://127.0.0.1:5000/tasks/${id}`, { method: 'DELETE' })
+    fetch(`${API_URL}/tasks/${id}`, { method: 'DELETE' })
       .then(() => carregarTarefas());
   };
 
   const clearCompleted = () => {
-    fetch('http://127.0.0.1:5000/tasks/clear-completed', { method: 'DELETE' })
+    fetch(`${API_URL}/tasks/clear-completed`, { method: 'DELETE' })
       .then(() => carregarTarefas());
   };
 
